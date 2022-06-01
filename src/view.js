@@ -1,46 +1,34 @@
 import React from 'react';
-import Table from 'react-bootstrap/Table';
 import './App.css';
+import Scard from './Scard';
 
-function View(){
-    const todos = [{ id: 1, task: "make static data", complete: false },
-    { id: 2, task: "make dynamic data", complete: false }]
+class View extends React.Component {
 
-
-  const buildRows = () =>  {
-    return todos.map((current) => (
-      <tr key={current.id}>
-        <td>
-          {current.id}
-        </td>
-        <td>
-          {current.task}
-        </td>
-        <td>
-          {current.complete ? "yes" : "no"}
-        </td>
-      </tr>
+  buildPosts() {
+    return this.props.posts.map((current,i) => (
+      <Scard key={i} 
+      postId={current.postid}
+      id={current.id}
+      img={current.img}
+      text={current.text}
+      likes={current.likes}
+      likeaction={this.props.likeaction}
+      dislikes={current.dislikes}
+      dislikeaction={this.props.dislikeaction}
+      />
     )
     )
   }
 
-
+  render() {
     return (
       <>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Task</th>
-              <th>complete</th>
-            </tr>
-          </thead>
-          <tbody>
-            {buildRows()}
-          </tbody>
-        </Table>
+        <div>
+          {this.buildPosts()}
+        </div>
       </>
     );
-
+  }
 }
+
 export default View;
